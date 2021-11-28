@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:dio_logger/dio_logger.dart';
 import 'package:flutter/foundation.dart';
@@ -13,19 +11,27 @@ import 'package:movie_db/cubit/popular_tv_cubit.dart';
 import 'package:movie_db/cubit/theme_manager_cubit.dart';
 import 'package:movie_db/cubit/upcoming_cubit.dart';
 import 'package:movie_db/router/route.dart';
-import 'package:movie_db/widget/cast_list.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // QR.settings.enableDebugLog = false;
-  // QR.settings.enableLog = false;
+void initQR() {
+  QR.settings.enableDebugLog = kDebugMode;
+  QR.settings.enableLog = kDebugMode;
+}
+
+Dio provideDio() {
   final dio = Dio();
   dio.interceptors.add(dioLoggerInterceptor);
   dio.options.queryParameters["api_key"] = "3d11a299f3553fe500655a153f9dc3e7";
+  return dio;
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  initQR();
+  final dio = provideDio();
   final SharedPreferences pref = await SharedPreferences.getInstance();
   setPathUrlStrategy();
   runApp(
@@ -71,7 +77,7 @@ class MovieApp extends StatelessWidget {
               ResponsiveBreakpoint.autoScale(1000, name: DESKTOP),
             ],
           ),
-          themeMode: state,
+          themeMode: ThemeMode.light,
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
