@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,9 @@ import 'package:movie_db/cubit/basic_state.dart';
 import 'package:movie_db/cubit/popular_tv_cubit.dart';
 import 'package:movie_db/cubit/upcoming_cubit.dart';
 import 'package:movie_db/utils/configurations.dart';
+import 'package:movie_db/utils/extensions.dart';
 import 'package:movie_db/widget/movie_card.dart';
+import 'package:movie_db/widget/upcoming_carousel_widget.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:sealed_flutter_bloc/sealed_flutter_bloc.dart';
 
@@ -26,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: ListView(
         children: [
+          const UpcomingCarouselWidget(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

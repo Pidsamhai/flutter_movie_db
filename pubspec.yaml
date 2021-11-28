@@ -49,6 +49,7 @@ dependencies:
   responsive_framework: ^0.1.5
   shared_preferences: ^2.0.9
   qlevar_router: ^1.5.6
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:
